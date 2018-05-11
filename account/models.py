@@ -1,26 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,AbstractUser
 
 # Create your models here.
 
 
-class UserProfile(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE,unique=True)
-    birth=models.DateField(blank=True,null=True)
-    phone=models.CharField(max_length=20,null=True)
+class UserProfile(AbstractUser):
+    nick_name=models.CharField(max_length=50,verbose_name='昵称',default='小宝宝')
+    email = models.CharField(max_length=100,verbose_name='邮箱')
+    aboutme=models.TextField(max_length=100,verbose_name='个人介绍')
+    address=models.CharField(max_length=100,verbose_name='地址')
+    wechat=models.CharField(max_length=100,verbose_name='微信')
+    image=models.ImageField(upload_to='image/%Y/%m',default='image/touxiang.jpg',max_length=100,verbose_name='头像')
+
+    class Meta:
+        verbose_name='用户信息'
+        verbose_name_plural=verbose_name
 
     def __str__(self):
-        return 'user {}'.format(self.user.username)
-
-class UserInfo(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE,unique=True)
-    school=models.CharField(max_length=100,blank=True)
-    company=models.CharField(max_length=100,blank=True)
-    profession=models.CharField(max_length=100,blank=True)
-    address=models.CharField(max_length=100,blank=True)
-    aboutme=models.TextField(blank=True)
-
-    def __str__(self):
-        return 'user:{}'.format(self.user.username)
+        return self.username
 
 

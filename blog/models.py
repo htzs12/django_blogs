@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from account.models import UserProfile
 
 # Create your models here.
 
 
 class BlogArticles(models.Model):
     title=models.CharField(max_length=30,verbose_name='标题')
-    author=models.ForeignKey(User,on_delete=models.CASCADE,related_name='blog_posts',verbose_name='作者')
+    author=models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name='blog_posts',verbose_name='作者')
     body=models.TextField(verbose_name='内容')
     publish=models.DateTimeField(default=timezone.now,verbose_name='发布时间')
 

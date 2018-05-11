@@ -35,7 +35,7 @@
                     <li><a href="{% url 'account:logout' %}">退出</a></li>
                     {% else %}
                     <li><a href="{% url 'account:login' %}">登录</a></li>
-                    <li><a href="#">注册</a></li>
+                    <li><a href="{% url 'account:register' %}">注册</a></li>
                 {% endif %}
             </ul>
           </div>
@@ -51,8 +51,8 @@
     <p class="text-center">copy right www.baidu.com</p>
   </div>
 
-    <script src="{% static "js/jquery.css" %}"></script>
-    <script src="{% static "js/bootstrap.css" %}"></script>
+    <script src="{% static "js/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
 
       {% block my_js %}
     

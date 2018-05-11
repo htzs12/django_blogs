@@ -9,9 +9,8 @@ from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
-from .forms import LoginForm,RegistrationForm,UserProfileForm,ChangePwdForm
-from .models import UserInfo,UserProfile
-
+from .forms import LoginForm,RegistrationForm,ChangePwdForm,UserInfoForm
+from .models import UserProfile
 
 def user_login(request):
     if request.method == 'POST':
@@ -38,8 +37,7 @@ def user_logout(request):
 def register(request):
     if request.method == 'POST':
         user_form=RegistrationForm(request.POST)
-        userprofile_form=UserProfileForm(request.POST)
-        if user_form.is_valid() and userprofile_form.is_valid():
+        if user_form.is_valid():
             user_name=request.POST.get('username','')
             if User.objects.filter(username=user_name):
                 return HttpResponse('用户名已存在~')
@@ -47,17 +45,14 @@ def register(request):
                 new_user=user_form.save(commit=False)
                 new_user.set_password(user_form.cleaned_data['password'])
                 new_user.save()
-                new_profile=userprofile_form.save(commit=False)
-                new_profile.user=new_user
-                new_profile.save()
                 return HttpResponse('注册成功~')
         else:
             return HttpResponse('填写有误~')
     else:
         user_form=RegistrationForm()
-        userprofile_form=UserProfileForm()
-        return render(request,'register.html',{'form':user_form,'profile':userprofile_form})
+        return render(request,'register.html',{'form':user_form})
 
+@login_required(login_url='/account/login/')
 def change_pwd(requset):
     pwd_form=ChangePwdForm(requset.POST)
     if pwd_form.is_valid():
@@ -74,8 +69,19 @@ def change_pwd(requset):
 
 @login_required(login_url='/account/login/')
 def myself(request):
-    user=User.objects.get(username=request.user.username)
-    userprofile=UserProfile.objects.get(user=user)
-    userinfo=UserInfo.objects.get(user=user)
-    return render(request,'myself.html',{'user':user,'userprofile':userprofile,'userinfo':userinfo})
+    if request.method == 'GET':
+        return render(request,'myself.html',{})
+
+#@login_required(login_url='/account/login/')
+class UpdateInfoView(View):
+    def get(self,request):
+        return render(request,'user_upload.html',{})
+
+    def post(self,request):
+        info_form=UserInfoForm(request.POST,request.user)
+        if info_form.is_valid():
+            info_form.save()
+            return HttpResponseRedirect('/blog/list/')
+
+
 

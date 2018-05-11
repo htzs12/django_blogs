@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import UserProfile
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user','birth','phone')
-    list_filter = ('phone',)
+    list_display = ('nick_name','email')
+    list_filter = ('email',)
 
 admin.site.register(UserProfile,UserProfileAdmin)

@@ -12,9 +12,12 @@
       </configuration>
     </facet>
   </component>
+  <component name="Flask">
+    <option name="enabled" value="false" />
+  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.6 (mydjango) (1)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.5 (mydjango) (1)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

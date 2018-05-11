@@ -28,14 +28,6 @@
                 <laber for='{{ form.password2.id_for_label }}' class="col-md-5 control-label">密码2</laber>
                 <div class="col-md-6 text-left">{{ form.password2 }}</div>
             </div>
-            <div class="form-group">
-                <laber for='{{ form.birth.id_for_label }}' class="col-md-5 control-label">生日</laber>
-                <div class="col-md-6 text-left">{{ profile.birth }}</div>
-            </div>
-            <div class="form-group">
-                <laber for='{{ form.phone.id_for_label }}' class="col-md-5 control-label">手机</laber>
-                <div class="col-md-6 text-left">{{ profile.phone }}</div>
-            </div>
 
             <input type="submit" class="btn btn-primary btn-lg" value="注册">
             {% csrf_token %}

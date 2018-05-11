@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>{% block title %}博客首页{% endblock %}</title>
+
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/normalize.css" %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-default" role='navigation'>
+          <div class="navbar-header">
+            <a href="www.baidu.com" class="navber-brand"></a>
+          </div>
+          <div>
+            <ul class="nav navbar-nav" role='tablist'>
+              <li><a href="#">python</a></li>
+              <li><a href="#">lavascript</a></li>
+              <li><a href="#">java</a></li>
+              <li><a href="#">c++</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'blog:blog_title' %}">博客</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#">{{ user.username }}</a></li>
+                    <li><a href="{% url 'account:change_pwd' %}">修改密码</a></li>
+                    <li><a href="{% url 'account:logout' %}">退出</a></li>
+                    {% else %}
+                    <li><a href="{% url 'account:login' %}">登录</a></li>
+                    <li><a href="#">注册</a></li>
+                {% endif %}
+            </ul>
+          </div>
+      </nav>
+    </div>
+
+      {% block content %}
+        
+      {% endblock %}
+
+  <div class="container" style="margin-top:500px">
+    <hr>
+    <p class="text-center">copy right www.baidu.com</p>
+  </div>
+
+    <script src="{% static "js/jquery.css" %}"></script>
+    <script src="{% static "js/bootstrap.css" %}"></script>
+
+      {% block my_js %}
+    
+      {% endblock %}
+
+  </body>
+</html>

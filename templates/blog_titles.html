@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+浩哥博客首页
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row text-center vertical-middle-sm">
+		<h1>我的博客</h1>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-8">
+			<ul>
+			{% for blog in blogs %}
+				<li><a href="{% url 'blog:blog_article' blog.id %}">{{ blog.title }}</li></a>
+			{% endfor %}
+			</ul>
+		</div>
+		<div class="col-xs-6 col-md-4">
+			<h2>广告</h2>
+			<p>我是你浩哥哥哟</p>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

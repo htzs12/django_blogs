@@ -26,6 +26,6 @@ urlpatterns = [
     path('blog/',include('blog.urls',namespace='blog')),
     path('account/',include('account.urls',namespace='account')),
 
-    re_path('media/<(?P<path>.*)',serve,{'document_root':MEDIA_ROOT}),
+    re_path('media/(?P<path>.*)',serve,{'document_root':MEDIA_ROOT}),
 
 ]

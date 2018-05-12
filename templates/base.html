@@ -30,7 +30,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="{% url 'blog:blog_title' %}">博客</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="#">{{ user.username }}</a></li>
+                    <li><a href="{% url 'account:my_infomation' %}">{{ user.username }}</a></li>
                     <li><a href="{% url 'account:change_pwd' %}">修改密码</a></li>
                     <li><a href="{% url 'account:logout' %}">退出</a></li>
                     {% else %}

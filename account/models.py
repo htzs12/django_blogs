@@ -10,7 +10,7 @@ class UserProfile(AbstractUser):
     aboutme=models.TextField(max_length=100,verbose_name='个人介绍')
     address=models.CharField(max_length=100,verbose_name='地址')
     wechat=models.CharField(max_length=100,verbose_name='微信')
-    image=models.ImageField(upload_to='image/%Y/%m',default='image/touxiang.jpg',max_length=100,verbose_name='头像')
+    image=models.ImageField(upload_to='images/%Y/%m',default='images/touxiang.jpg',max_length=100,verbose_name='头像')
 
     class Meta:
         verbose_name='用户信息'
@@ -18,5 +18,6 @@ class UserProfile(AbstractUser):
 
     def __str__(self):
         return self.username
+
 
 

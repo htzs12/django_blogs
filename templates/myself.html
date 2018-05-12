@@ -62,14 +62,51 @@
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="修改信息">
+                <a href="{% url 'account:upload_info' %}"><div style="margin-right: 100px">
+                <button class="btn btn-primary btn-lg">修改信息</button>
+            </div></a>
             </div>
         </div>
         <div class="col-md-6">
-            <p>picture</p>
+            <p>我的头像</p>
+            <form action="{% url 'account:my_image' %}" method="post" enctype='multipart/form-data'>
+            <div style="margin-right: 100px">
+                <img src="/media/{{ request.user.image }}" name="user_face" class="img-circle" width="270px" id="my_photo">
+            </div>
+           <div class="row">
+               <div class="col-md-2">
+                   <input type="file" name="image" id="touxiang" value="上传头像" style="color: transparent;margin-top:8px">
+               </div>
+               <div class="col-md-2">
+                   <button type="submit" class="btn btn-default" name="submit" style="margin-left:60px;margin-bottom:30px">修改头像</button>
+               </div>
+           </div>
+                {% csrf_token %}
+            </form>
         </div>
     </div>
 </div>
 </div>
+{% endblock %}
+
+{% comment %}
+{% block my_js %}
+
+    <script>
+
+    $('#upload_image').on('click',function () {
+        //alert('图片上传');
+        $.ajax({
+            url:'{% url 'account:my_image' %}',
+            type:'POST',
+            data:{'img':img},
+            success:function (e) {
+                location.href="{% url 'account:my_infomation' %}"
+            },
+        });
+    })
+
+</script>
 
 {% endblock %}
+{% endcomment %}

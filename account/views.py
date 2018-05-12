@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
-from .forms import LoginForm,RegistrationForm,ChangePwdForm,UserInfoForm
+from .forms import LoginForm,RegistrationForm,ChangePwdForm,UserInfoForm,UploadImageForm
 from .models import UserProfile
 
 def user_login(request):
@@ -83,5 +83,9 @@ class UpdateInfoView(View):
             info_form.save()
             return HttpResponseRedirect('/blog/list/')
 
-
-
+class UploadImageView(View):
+    def post(self,request):
+        image_form=UploadImageForm(request.POST,request.FILES,instance=request.user)
+        if image_form.is_valid():
+            image_form.save()
+            return HttpResponseRedirect('/account/my-information')

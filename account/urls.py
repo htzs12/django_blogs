@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import UpdateInfoView
+from .views import UpdateInfoView,UploadImageView
 
 app_name='account'
 
@@ -11,4 +11,5 @@ urlpatterns=[
     path('change_pwd/',views.change_pwd,name='change_pwd'),
     path('my-information/',views.myself,name='my_infomation'),
     path('upload_info/',UpdateInfoView.as_view(),name='upload_info'),
+    path('my-image/',UploadImageView.as_view(),name='my_image'),
 ]
